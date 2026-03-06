@@ -25,23 +25,21 @@
 
 <body>
 
-    <h2>Two Factor Authentication Setup</h2>
+    
+    <h2>Setup Two Factor Authentication</h2>
 
-    <p>Scan this QR Code with Microsoft Authenticator</p>
+    <p>Scan this QR code using Authenticator App</p>
 
-    <img src="data:image/png;base64,@ViewBag.QRCode" />
+    <img src="data:image/png;base64,@ViewBag.QRCode" width="200" />
 
-    <br>
-    <br>
+    <form method="post" action="/Account/VerifySetupOTP">
 
-    <p>Secret Key</p>
+        <label>Enter OTP</label>
+        <input type="text" name="otp" />
 
-    <b>@ViewBag.SecretKey</b>
+        <button type="submit">Verify</button>
 
-    <br>
-    <br>
-
-    <a href="/Account/Login">Go to Login</a>
+    </form>
 
 </body>
 </html>

@@ -15,12 +15,15 @@ namespace authLogin.Models
         [Required]
         public string PasswordHash { get; set; }
 
-        public bool Is2FAEnabled { get; set; }
+        public bool Is2FAEnabled { get; set; } = false;
 
         public string? OTP { get; set; }
 
         public DateTime? OTPExpiry { get; set; }
 
         public string? TwoFactorSecretKey { get; set; }
+
+      
+        public bool Is2FASetupCompleted { get; set; } = false;
     }
 }

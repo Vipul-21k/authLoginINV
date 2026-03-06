@@ -59,13 +59,16 @@ namespace authLogin.Controllers
                 var secretKey = GenerateSecretKey();
                 user.TwoFactorSecretKey = secretKey;
 
+                user.Is2FAEnabled = false;
+                user.Is2FASetupCompleted = false;
+
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
                 var qrCode = GenerateQrCode(user.Email, secretKey);
 
+                TempData["UserEmail"] = user.Email;
                 ViewBag.QRCode = qrCode;
-                ViewBag.SecretKey = secretKey;
 
                 return View("Setup2FA");
             }
@@ -92,7 +95,7 @@ namespace authLogin.Controllers
                 return Content("Invalid password");
             }
 
-            if (user.Is2FAEnabled)
+            if (user.Is2FAEnabled && user.Is2FASetupCompleted)
             {
                 TempData["UserEmail"] = user.Email;
                 return RedirectToAction("VerifyOTP");
@@ -137,11 +140,40 @@ namespace authLogin.Controllers
 
             return Content("Invalid OTP");
         }
+
+        /// After QR Scan verify OTP 
+[HttpPost]
+public IActionResult VerifySetupOTP(string otp)
+{
+    var email = TempData["UserEmail"]?.ToString();
+
+    var user = _context.Users.FirstOrDefault(x => x.Email == email);
+
+    var secretKey = Base32Encoding.ToBytes(user.TwoFactorSecretKey);
+
+    var totp = new Totp(secretKey);
+
+    bool isValid = totp.VerifyTotp(otp, out long step);
+
+    if (isValid)
+    {
+        user.Is2FAEnabled = true;
+        user.Is2FASetupCompleted = true;
+
+        _context.SaveChanges();
+
+        return RedirectToAction("Login");
+    }
+
+    return Content("Invalid OTP");
+}
+        // redirect dashboard after login 
         public IActionResult Dashboard()
         {
             return View();
         }
 
+        //after logout redirect to login page 
         public IActionResult Logout()
         {
             TempData.Clear();
