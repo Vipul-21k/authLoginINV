@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Segoe UI;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h2>Sign in</h2>
+
+        <form method="post">
+
+            <label>Email</label>
+            <input type="email" name="email" required />
+
+            <label>Password</label>
+            <input type="password" name="password" required />
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <br>
+
+        <a href="/Account/Signup">Create Account</a>
+
+    </div>
+
+</body>
+</html>

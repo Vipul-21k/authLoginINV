@@ -1,0 +1,76 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #0078D4;
+            color: white;
+            border: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h2>Create Account</h2>
+
+        <form method="post">
+
+            <label>Username</label>
+            <input type="text" name="Username" required />
+
+            <label>Email</label>
+            <input type="email" name="Email" required />
+
+            <label>Password</label>
+            <input type="password" name="PasswordHash" required />
+
+            <label>Enable 2FA</label>
+            <input type="checkbox" name="Is2FAEnabled" value="true" />
+
+            <br><br>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
